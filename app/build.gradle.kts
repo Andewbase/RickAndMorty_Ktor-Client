@@ -44,6 +44,7 @@ android {
     }
     buildFeatures {
         compose = true
+        buildConfig = true
     }
     composeOptions {
         kotlinCompilerExtensionVersion = "1.5.1"
@@ -74,7 +75,9 @@ dependencies {
     debugImplementation(libs.androidx.ui.test.manifest)
 
     implementation(libs.ktor)
-    implementation(libs.ktor.okhttp)
+    implementation(libs.ktor.androidClient)
+    implementation(libs.ktor.logging)
+    implementation(libs.ktor.contentNegotiation)
 
     implementation(libs.kotlinx.serialization)
 

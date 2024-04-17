@@ -1,17 +1,14 @@
-package com.example.rickandmorty.network.entity
+package com.example.rickandmorty.domain
 
-import kotlinx.serialization.Serializable
-
-@Serializable
-data class CharacterDTO(
+data class Character(
     val created: String,
     val episode: List<String>,
     val gender: String,
     val id: Int,
     val image: String,
-    val locationDTO: LocationDTO,
+    val locationDTO: Location,
     val name: String,
-    val originDTO: OriginDTO,
+    val originDTO: Origin,
     val species: String,
     val status: String,
     val type: String,
