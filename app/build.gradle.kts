@@ -19,7 +19,7 @@ android {
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
 
-        buildConfigField("String","RICK_AND_MORTY_BASE_URL", "\"https://rickandmortyapi.com/api/character/\"")
+        buildConfigField("String","RICK_AND_MORTY_BASE_URL", "\"https://rickandmortyapi.com/api\"")
 
         vectorDrawables {
             useSupportLibrary = true
