@@ -19,7 +19,7 @@ android {
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
 
-        buildConfigField("String","RICK_AND_MORTY_BASE_URL", "\"https://rickandmortyapi.com/api\"")
+        buildConfigField("String","RICK_AND_MORTY_BASE_URL", "\"https://rickandmortyapi.com/api/\"")
 
         vectorDrawables {
             useSupportLibrary = true
@@ -47,7 +47,7 @@ android {
         buildConfig = true
     }
     composeOptions {
-        kotlinCompilerExtensionVersion = "1.5.1"
+        kotlinCompilerExtensionVersion = "1.5.11"
     }
     packaging {
         resources {
@@ -76,6 +76,7 @@ dependencies {
 
     implementation(libs.ktor)
     implementation(libs.ktor.androidClient)
+    implementation(libs.ktor.clientSerialization)
     implementation(libs.ktor.logging)
     implementation(libs.ktor.contentNegotiation)
 
@@ -85,5 +86,6 @@ dependencies {
     implementation(libs.kotlinx.coroutines.android)
 
     implementation(libs.hilt)
+    implementation (libs.hilt.navigation.compose)
     kapt(libs.hilt.compiler)
 }

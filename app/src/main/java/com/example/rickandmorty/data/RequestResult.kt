@@ -1,12 +1,12 @@
 package com.example.rickandmorty.data
 
-sealed class RequestResult<out E: Any>(open val data: E? = null){
+sealed class RequestResult<out E: Any>(open val data: E? = null, open val error: Throwable? = null){
 
     class InProgress<E: Any>(data: E? = null): RequestResult<E>(data)
 
     class Success<E: Any>(data: E): RequestResult<E>(data)
 
-    class Error<E: Any>(data: E? = null, error: Throwable? = null): RequestResult<E>(data)
+    class Error<E: Any>(data: E? = null, error: Throwable? = null): RequestResult<E>(data, error = error)
 }
 
 

@@ -5,7 +5,7 @@ import kotlinx.serialization.Serializable
 @Serializable
 data class GetCharactersDTO(
     val info: InfoDTO,
-    val result: List<CharacterDTO>
+    val results: List<CharacterDTO>
 ){
-    val characters get() = this.result.map { it.toCharacter() }
+    val characters get() = this.results.map { it.toCharacter() }
 }

@@ -1,24 +1,23 @@
 package com.example.rickandmorty.data
 
-import com.example.rickandmorty.data.network.HttpClientResult
+import android.util.Log
 import com.example.rickandmorty.data.network.RickAndMortyApi
-import com.example.rickandmorty.domain.Character
-import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 import javax.inject.Singleton
 
 interface RickAndMortyRepository {
 
-   /* suspend fun getAll(): Character
+    suspend fun getAll()
     @Singleton
     class Base @Inject constructor(private val api: RickAndMortyApi): RickAndMortyRepository{
-        override suspend fun getAll(): Character {
+        override suspend fun getAll() {
             when (val apiResult = api.getCharacter(1)){
-                is HttpClientResult.Success -> return apiResult.data.characterDTO.toCharacter()
-                is HttpClientResult.Error -> println()
+                is RequestResult.Success -> Log.e("Log-Error", "SUCCES : ${apiResult.data}")
+                is RequestResult.Error -> Log.e("Log-Error", "ERROR: ${apiResult.error}")
+                is RequestResult.InProgress -> Log.e("Log-Error", "InProgress: ${apiResult.data}")
             }
         }
 
-    }*/
+    }
 
 }
