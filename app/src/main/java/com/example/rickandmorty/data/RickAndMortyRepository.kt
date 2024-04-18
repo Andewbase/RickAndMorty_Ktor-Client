@@ -13,7 +13,7 @@ interface RickAndMortyRepository {
         override suspend fun getAll() {
             when (val apiResult = api.getCharacter(1)){
                 is RequestResult.Success -> Log.e("Log-Error", "SUCCES : ${apiResult.data}")
-                is RequestResult.Error -> Log.e("Log-Error", "ERROR: ${apiResult.error}")
+                is RequestResult.Error -> Log.e("Log-Error", "ERROR: ${apiResult.data}")
                 is RequestResult.InProgress -> Log.e("Log-Error", "InProgress: ${apiResult.data}")
             }
         }
