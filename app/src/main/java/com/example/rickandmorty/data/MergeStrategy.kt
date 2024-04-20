@@ -1,6 +1,6 @@
 package com.example.rickandmorty.data
 
-interface MergeStrategy<T: Any>{
+interface MergeStrategy<T>{
 
     fun merge(network: T, dataBase: T): T
 

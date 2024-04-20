@@ -1,6 +1,5 @@
 package com.example.rickandmorty.data
 
-import android.util.Log
 import com.example.rickandmorty.data.cache.CharacterDao
 import com.example.rickandmorty.data.network.RickAndMortyApi
 import com.example.rickandmorty.domain.Character
