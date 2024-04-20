@@ -1,20 +1,37 @@
 package com.example.rickandmorty.data
 
 import android.util.Log
+import com.example.rickandmorty.data.cache.CharacterDao
 import com.example.rickandmorty.data.network.RickAndMortyApi
+import com.example.rickandmorty.domain.Character
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.map
 import javax.inject.Inject
 import javax.inject.Singleton
 
 interface RickAndMortyRepository {
 
-    suspend fun getAll()
+    fun getAll(): Flow<List<Character>>
+
+    fun getAllDataBase(): Flow<List<Character>>
+
+
     @Singleton
-    class Base @Inject constructor(private val api: RickAndMortyApi): RickAndMortyRepository{
-        override suspend fun getAll() {
-            when (val apiResult = api.getCharacter(1)){
-                is RequestResult.Success -> Log.e("Log-Error", "SUCCES : ${apiResult.data}")
-                is RequestResult.Error -> Log.e("Log-Error", "ERROR: ${apiResult.data}")
-                is RequestResult.InProgress -> Log.e("Log-Error", "InProgress: ${apiResult.data}")
+    class Base @Inject constructor(
+        private val api: RickAndMortyApi,
+        private val dao: CharacterDao
+    ): RickAndMortyRepository{
+        override fun getAll(
+            
+        ): Flow<List<Character>> {
+           return
+        }
+
+        override fun getAllDataBase(): Flow<List<Character>> {
+            return dao.getAllCharacters().map { list ->
+                list.map { character ->
+                    character.toCharacter()
+                }
             }
         }
 
