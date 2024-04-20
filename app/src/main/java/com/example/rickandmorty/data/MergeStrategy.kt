@@ -1,12 +1,12 @@
 package com.example.rickandmorty.data
 
-interface MergeStrategy<T>{
+interface MergeStrategy<T: Any>{
 
     fun merge(network: T, dataBase: T): T
 
 }
 
-class ResultMergeStrategy<T: Any>: MergeStrategy<RequestResult<T>> {
+internal class ResultMergeStrategy<T: Any>: MergeStrategy<RequestResult<T>> {
 
     override fun merge(network: RequestResult<T>, dataBase: RequestResult<T>): RequestResult<T> {
         return when {

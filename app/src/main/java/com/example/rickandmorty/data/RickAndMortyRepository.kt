@@ -11,7 +11,9 @@ import javax.inject.Singleton
 
 interface RickAndMortyRepository {
 
-    fun getAll(): Flow<List<Character>>
+    fun getAll(
+        mergeStrategy: MergeStrategy<RequestResult<List<Character>>> = ResultMergeStrategy()
+    ): Flow<List<Character>>
 
     fun getAllDataBase(): Flow<List<Character>>
 
@@ -22,7 +24,7 @@ interface RickAndMortyRepository {
         private val dao: CharacterDao
     ): RickAndMortyRepository{
         override fun getAll(
-            
+            mergeStrategy: MergeStrategy<RequestResult<List<Character>>>
         ): Flow<List<Character>> {
            return
         }
