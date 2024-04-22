@@ -12,7 +12,9 @@ interface CharacterDao {
     suspend fun saveCharacters(characters: List<CharacterDBO>)
 
     @Query("SELECT * FROM character")
-    fun getAllCharacters(): Flow<List<CharacterDBO>>
+    suspend fun getAllCharacters(): List<CharacterDBO>
+
+    fun observeAll(): Flow<List<CharacterDBO>>
 
     @Query("SELECT * FROM character WHERE id = :id")
     fun getCharacterById(id: Int): Flow<CharacterDBO>

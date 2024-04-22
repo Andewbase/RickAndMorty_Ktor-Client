@@ -18,9 +18,9 @@ data class CharacterDBO(
     @ColumnInfo("gender") val gender: String,
     @PrimaryKey @ColumnInfo("id") val id: Int,
     @ColumnInfo("image") val image: String,
-    @ColumnInfo("location") @Embedded val location: LocationDBO,
+    @Embedded(prefix = "loc_") val location: LocationDBO,
     @ColumnInfo("name") val name: String,
-    @ColumnInfo("origin") @Embedded val origin: OriginDBO,
+    @Embedded(prefix = "origin") val origin: OriginDBO,
     @ColumnInfo("species") val species: String,
     @ColumnInfo("status") val status: String,
     @ColumnInfo("type") val type: String,
@@ -28,11 +28,11 @@ data class CharacterDBO(
 )
 
 data class LocationDBO(
-    @ColumnInfo("location_name") val name: String,
-    @ColumnInfo("location_url") val url: String
+     val name: String,
+     val url: String
 )
 
 data class OriginDBO(
-    @ColumnInfo("origin_name") val name: String,
-    @ColumnInfo("origin_url") val url: String
+    val name: String,
+    val url: String
 )

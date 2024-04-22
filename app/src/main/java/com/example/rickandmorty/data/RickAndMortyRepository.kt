@@ -1,6 +1,7 @@
 package com.example.rickandmorty.data
 
 import com.example.rickandmorty.data.cache.CharacterDao
+import com.example.rickandmorty.data.cache.entity.CharacterDBO
 import com.example.rickandmorty.data.network.RickAndMortyApi
 import com.example.rickandmorty.domain.Character
 import kotlinx.coroutines.flow.Flow
@@ -35,7 +36,7 @@ interface RickAndMortyRepository {
             return dataBase.combine(network, mergeStrategy::merge)
                 .flatMapLatest { result ->
                     if (result is RequestResult.Success){
-                        dao.getAllCharacters().map { list ->
+                        dao.observeAll().map { list ->
                             list.map {character ->
                                 character.toCharacter()
                             }
@@ -51,18 +52,18 @@ interface RickAndMortyRepository {
 
             val dataBaseRequest = dao::getAllCharacters.asFlow()
                 .map {
-                    RequestResult.Success(
-                        it.map { list ->
-                            list.map { character ->
-                                character.toCharacter()
-                            }
-                        }
-                    )
+                    RequestResult.Success(it)
                 }
 
-            val start = flowOf<RequestResult<List<Character>>>(RequestResult.InProgress())
+            val start = flowOf<RequestResult<List<CharacterDBO>>>(RequestResult.InProgress())
 
-            return merge(start, dataBaseRequest)
+            return merge(start, dataBaseRequest).map { result ->
+               result.map { list ->
+                   list.map { character ->
+                       character.toCharacter()
+                   }
+               }
+            }
         }
 
         private fun getAllNetwork(): Flow<RequestResult<List<Character>>> {
