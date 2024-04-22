@@ -7,16 +7,6 @@ sealed class RequestResult<out E: Any>(open val data: E? = null){
     class Success<E: Any>(override val data: E): RequestResult<E>(data)
 
     class Error<E: Any>(data: E? = null, val error: Throwable? = null): RequestResult<E>(data)
-
-    fun onSuccess(block: (E) -> Unit): RequestResult<E>{
-        if (this is Success) block (data)
-        return this
-    }
-
-    fun onError(block: (Throwable) -> Unit): RequestResult<E>{
-        if (this is Error) block(error!!)
-        return this
-    }
 }
 
 
