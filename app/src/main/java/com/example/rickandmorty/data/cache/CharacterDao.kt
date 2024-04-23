@@ -1,11 +1,13 @@
 package com.example.rickandmorty.data.cache
 
+import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import com.example.rickandmorty.data.cache.entity.CharacterDBO
 import kotlinx.coroutines.flow.Flow
 
+@Dao
 interface CharacterDao {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
@@ -14,6 +16,7 @@ interface CharacterDao {
     @Query("SELECT * FROM character")
     suspend fun getAllCharacters(): List<CharacterDBO>
 
+    @Query("SELECT * FROM character")
     fun observeAll(): Flow<List<CharacterDBO>>
 
     @Query("SELECT * FROM character WHERE id = :id")

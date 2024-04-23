@@ -4,6 +4,7 @@ import com.example.rickandmorty.data.cache.CharacterDao
 import com.example.rickandmorty.data.cache.entity.CharacterDBO
 import com.example.rickandmorty.data.network.RickAndMortyApi
 import com.example.rickandmorty.domain.Character
+import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.asFlow
 import kotlinx.coroutines.flow.combine
@@ -27,6 +28,7 @@ interface RickAndMortyRepository {
         private val api: RickAndMortyApi,
         private val dao: CharacterDao
     ) : RickAndMortyRepository {
+        @OptIn(ExperimentalCoroutinesApi::class)
         override fun getAll(
             mergeStrategy: MergeStrategy<RequestResult<List<Character>>>
         ): Flow<RequestResult<List<Character>>> {
@@ -46,6 +48,10 @@ interface RickAndMortyRepository {
                         flowOf(result)
                     }
                 }
+        }
+
+        fun fetchLatest(): Flow<RequestResult<List<Character>>>{
+            return getAllNetwork()
         }
 
         private fun getAllDataBase(): Flow<RequestResult<List<Character>>> {

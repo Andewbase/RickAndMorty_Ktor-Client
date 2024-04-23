@@ -27,11 +27,9 @@ class RickAndMortyApiImplementation @Inject constructor(private val client: Http
 
         return when(response){
             is HttpClientResult.Success ->{
-                Log.e("Log-Error", "SUCCES : ${response.data}")
                 RequestResult.Success(data = response.data.characters) // map toCharacter()
             }
             is HttpClientResult.Error ->{
-                Log.e("Log-Error", "Error : ${response.exception}")
                 RequestResult.Error(error = response.exception.cause)
             }
         }

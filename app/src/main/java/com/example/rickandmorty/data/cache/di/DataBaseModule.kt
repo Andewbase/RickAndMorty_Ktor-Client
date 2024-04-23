@@ -2,8 +2,8 @@ package com.example.rickandmorty.data.cache.di
 
 import android.content.Context
 import androidx.room.Room
-import com.example.rickandmorty.data.cache.AppDatabase.RickAndMortyDataBase
 import com.example.rickandmorty.data.cache.CharacterDao
+import com.example.rickandmorty.data.cache.RickAndMortyDataBase
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
