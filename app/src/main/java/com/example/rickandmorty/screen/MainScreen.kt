@@ -1,10 +1,15 @@
 package com.example.rickandmorty.screen
 
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
+import coil.compose.AsyncImage
 
 @Composable
 fun MainScreen (state: State){
@@ -63,8 +68,15 @@ private fun ShowContent(state: State.Error){
     }
 }
 @Composable
-private fun Item(characterUI: CharacterUI){
-    Column {
+private fun Item(characterUI: CharacterUI, modifier: Modifier = Modifier){
+    Column(
+        horizontalAlignment = Alignment.CenterHorizontally,
+        modifier = modifier.fillMaxSize()
+    ) {
+        AsyncImage(
+            model = characterUI.image,
+            contentDescription = "Character Image"
+        )
         Text(text = characterUI.name)
     }
 }
