@@ -1,15 +1,12 @@
 package com.example.rickandmorty.data.network
 
-import android.util.Log
 import com.example.rickandmorty.BuildConfig
 import com.example.rickandmorty.data.RequestResult
-import com.example.rickandmorty.data.network.entity.CharacterDTO
 import com.example.rickandmorty.data.network.entity.GetCharactersDTO
 import com.example.rickandmorty.domain.Character
 import io.ktor.client.HttpClient
 import io.ktor.client.call.body
 import io.ktor.client.request.HttpRequestBuilder
-import io.ktor.client.request.get
 import io.ktor.client.request.parameter
 import io.ktor.client.request.request
 import io.ktor.client.request.url
