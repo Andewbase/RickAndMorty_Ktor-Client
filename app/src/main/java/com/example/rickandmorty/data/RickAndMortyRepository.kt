@@ -23,6 +23,10 @@ interface RickAndMortyRepository {
         mergeStrategy: MergeStrategy<RequestResult<List<Character>>> = ResultMergeStrategy()
     ): Flow<RequestResult<List<Character>>>
 
+    fun fetchLatest(): Flow<RequestResult<List<Character>>>
+
+    suspend fun getByIdCharacter(id: Int): Character
+
     @Singleton
     class Base @Inject constructor(
         private val api: RickAndMortyApi,
@@ -50,8 +54,12 @@ interface RickAndMortyRepository {
                 }
         }
 
-        fun fetchLatest(): Flow<RequestResult<List<Character>>>{
+        override fun fetchLatest(): Flow<RequestResult<List<Character>>>{
             return getAllNetwork()
+        }
+
+        override suspend fun getByIdCharacter(id: Int): Character {
+            return dao.getCharacterById(id).toCharacter()
         }
 
         private fun getAllDataBase(): Flow<RequestResult<List<Character>>> {
