@@ -1,4 +1,4 @@
-package com.example.rickandmorty.screen
+package com.example.rickandmorty.screen.characters
 
 import androidx.lifecycle.ViewModel
 import com.example.rickandmorty.data.RequestResult
@@ -39,15 +39,15 @@ class MainViewModel @Inject constructor(private  val repository: RickAndMortyRep
 
 }
 
-private fun Character.toCharacterUI(): CharacterUI{
-    return CharacterUI(
+private fun Character.toCharacterUI(): CharacterItemUI {
+    return CharacterItemUI(
         id = this.id,
         name = this.name,
         image = this.image
     )
 }
 
-private fun RequestResult<List<CharacterUI>>.toState(): State{
+private fun RequestResult<List<CharacterItemUI>>.toState(): State {
     return when(this){
         is RequestResult.Success -> State.Success(data)
         is RequestResult.Error -> State.Error()
@@ -57,8 +57,8 @@ private fun RequestResult<List<CharacterUI>>.toState(): State{
 
 sealed class State {
     object None: State()
-    class Loading(val characters: List<CharacterUI>? = null): State()
-    class Error(val characters: List<CharacterUI>? = null) : State()
-    class Success(val characters: List<CharacterUI>): State()
+    class Loading(val characters: List<CharacterItemUI>? = null): State()
+    class Error(val characters: List<CharacterItemUI>? = null) : State()
+    class Success(val characters: List<CharacterItemUI>): State()
 
 }
