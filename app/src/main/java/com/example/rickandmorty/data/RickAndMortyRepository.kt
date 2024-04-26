@@ -25,7 +25,7 @@ interface RickAndMortyRepository {
 
     fun fetchLatest(): Flow<RequestResult<List<Character>>>
 
-    suspend fun getByIdCharacter(id: Int): Character
+    fun getByIdCharacter(id: Int): Flow<Character>
 
     @Singleton
     class Base @Inject constructor(
@@ -58,8 +58,8 @@ interface RickAndMortyRepository {
             return getAllNetwork()
         }
 
-        override suspend fun getByIdCharacter(id: Int): Character {
-            return dao.getCharacterById(id).toCharacter()
+        override fun getByIdCharacter(id: Int): Flow<Character> {
+            return dao.getCharacterById(id).map{it.toCharacter()}
         }
 
         private fun getAllDataBase(): Flow<RequestResult<List<Character>>> {

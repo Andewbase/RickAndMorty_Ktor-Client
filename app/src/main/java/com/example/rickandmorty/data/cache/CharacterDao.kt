@@ -20,7 +20,7 @@ interface CharacterDao {
     fun observeAll(): Flow<List<CharacterDBO>>
 
     @Query("SELECT * FROM character WHERE id = :id")
-    suspend fun getCharacterById(id: Int): CharacterDBO
+    fun getCharacterById(id: Int): Flow<CharacterDBO>
 
     @Query("SELECT * FROM character WHERE name = :name")
     fun getCharacterByName(name: String): Flow<CharacterDBO>

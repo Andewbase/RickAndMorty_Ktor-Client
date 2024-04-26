@@ -28,7 +28,7 @@ fun DetailScreen (state: DetailState, modifier: Modifier = Modifier){
 
         AsyncImage(
             modifier = modifier.align(Alignment.CenterHorizontally),
-            model = character!!.image,
+            model = character.image,
             contentDescription = "Character Img"
         )
 
@@ -88,7 +88,11 @@ fun DetailScreen (state: DetailState, modifier: Modifier = Modifier){
                     .padding(end = 100.dp),
                 contentAlignment = Alignment.Center,
             ) {
-                Text(text =character.type)
+                if (character.type.isBlank()){
+                    Text(text = "No information available")
+                }else{
+                    Text(text = character.type)
+                }
             }
         }
 
