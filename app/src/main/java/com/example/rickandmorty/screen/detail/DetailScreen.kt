@@ -88,11 +88,7 @@ fun DetailScreen (state: DetailState, modifier: Modifier = Modifier){
                     .padding(end = 100.dp),
                 contentAlignment = Alignment.Center,
             ) {
-                if (character.type.isBlank()){
-                    Text(text = "No information available")
-                }else{
-                    Text(text = character.type)
-                }
+                Text(text = character.type)
             }
         }
 

@@ -25,7 +25,7 @@ fun CharacterDBO.toCharacter(): Character{
         ),
         species = this.species,
         status = this.status,
-        type = this.type,
+        type = checkType(this.type) ,
         url = this.url
     )
 }
@@ -51,4 +51,12 @@ fun Character.toCharacterDBO(): CharacterDBO{
         type = this.type,
         url = this.url
     )
+}
+
+private fun checkType(type: String): String{
+  return  if (type.isBlank()){
+       "No information available"
+    }else{
+        type
+    }
 }
