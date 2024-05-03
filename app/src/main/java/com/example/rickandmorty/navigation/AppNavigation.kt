@@ -33,7 +33,7 @@ fun AppNavigation(){
         composable(route = detailRoute(), arguments = detailArgument()){
             val detailViewModel = hiltViewModel<DetailViewModel>()
             val state  = detailViewModel.state
-            DetailScreen(state = state)
+            DetailScreen(state = state, navController = navController)
         }
     }
 }
