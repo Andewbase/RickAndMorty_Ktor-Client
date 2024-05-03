@@ -1,6 +1,7 @@
 package com.example.rickandmorty.screen.detail
 
 import android.annotation.SuppressLint
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -60,9 +61,9 @@ fun DetailScreen (
         },
     ){
         Column(
-            modifier = modifier
-                .fillMaxSize()
-                .padding(top = 40.dp)
+            modifier = modifier.fillMaxSize(),
+            verticalArrangement = Arrangement.Center,
+            horizontalAlignment = Alignment.CenterHorizontally
         ) {
 
             AsyncImage(
