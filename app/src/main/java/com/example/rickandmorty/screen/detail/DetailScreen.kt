@@ -26,7 +26,7 @@ import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import coil.compose.AsyncImage
-import com.example.rickandmorty.ui.theme.RickAndMortyTheme
+import com.example.rickandmorty.ui.theme.AppTheme
 
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @OptIn(ExperimentalMaterial3Api::class)
@@ -144,7 +144,7 @@ fun DetailScreen (
 @Composable
 fun DetailScreenPreview() {
 
-    RickAndMortyTheme {
+    AppTheme {
         DetailScreen(
             state = DetailState(),
             navController = rememberNavController()
