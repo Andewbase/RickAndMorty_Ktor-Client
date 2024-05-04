@@ -17,11 +17,3 @@ fun <I:Any, O:Any> RequestResult<I>.map(mapper: (I) -> O): RequestResult<O>{
         is RequestResult.InProgress -> RequestResult.InProgress(data?.let(mapper))
     }
 }
-
-internal fun <T: Any> Result<T>.toRequestResult(): RequestResult<T>{
-    return when{
-        isSuccess -> RequestResult.Success(getOrThrow())
-        isFailure -> RequestResult.Error()
-        else -> error("Imposoble Branch")
-    }
-}
