@@ -1,25 +1,28 @@
 package com.example.rickandmorty.navigation
 
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NamedNavArgument
+import androidx.navigation.NavHostController
 import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
-import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
 import com.example.rickandmorty.Constant.ID_ARGUMENT
 import com.example.rickandmorty.screen.characters.MainScreen
 import com.example.rickandmorty.screen.characters.MainViewModel
 import com.example.rickandmorty.screen.detail.DetailScreen
 import com.example.rickandmorty.screen.detail.DetailViewModel
+import com.example.rickandmorty.screen.favorits.FavoritesScreen
 
 @Composable
-fun AppNavigation(){
+fun AppNavigation(navController: NavHostController, padding: PaddingValues){
 
-    val navController = rememberNavController()
+
 
     NavHost(
         navController = navController,
@@ -34,6 +37,9 @@ fun AppNavigation(){
             val detailViewModel = hiltViewModel<DetailViewModel>()
             val state  = detailViewModel.state
             DetailScreen(state = state, navController = navController)
+        }
+        composable(route = AppScreens.Favorites.name){
+            FavoritesScreen()
         }
     }
 }
