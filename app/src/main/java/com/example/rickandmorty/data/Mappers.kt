@@ -26,7 +26,8 @@ fun CharacterDBO.toCharacter(): Character{
         species = this.species,
         status = this.status,
         type = checkType(this.type) ,
-        url = this.url
+        url = this.url,
+        isFavorite = this.isFavorite
     )
 }
 
@@ -49,7 +50,8 @@ fun Character.toCharacterDBO(): CharacterDBO{
         species = this.species,
         status = this.status,
         type = this.type,
-        url = this.url
+        url = this.url,
+        isFavorite = this.isFavorite
     )
 }
 

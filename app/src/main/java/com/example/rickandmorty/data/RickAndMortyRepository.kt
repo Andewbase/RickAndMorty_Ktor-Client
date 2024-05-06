@@ -27,6 +27,8 @@ interface RickAndMortyRepository {
 
     fun getByIdCharacter(id: Int): Flow<Character>
 
+    suspend fun updateCharacter(character: Character)
+
     @Singleton
     class Base @Inject constructor(
         private val api: RickAndMortyApi,
@@ -60,6 +62,10 @@ interface RickAndMortyRepository {
 
         override fun getByIdCharacter(id: Int): Flow<Character> {
             return dao.getCharacterById(id).map{it.toCharacter()}
+        }
+
+        override suspend fun updateCharacter(character: Character) {
+            dao.updateCharacter(character.toCharacterDBO())
         }
 
         private fun getAllDataBase(): Flow<RequestResult<List<Character>>> {

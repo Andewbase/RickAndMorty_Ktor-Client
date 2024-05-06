@@ -24,7 +24,8 @@ data class CharacterDBO(
     @ColumnInfo("species") val species: String,
     @ColumnInfo("status") val status: String,
     @ColumnInfo("type") val type: String,
-    @ColumnInfo("url") val url: String
+    @ColumnInfo("url") val url: String,
+    @ColumnInfo("isFavorite") val isFavorite: Boolean
 )
 
 data class LocationDBO(

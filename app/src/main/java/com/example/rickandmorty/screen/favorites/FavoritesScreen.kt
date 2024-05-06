@@ -1,4 +1,4 @@
-package com.example.rickandmorty.screen.favorits
+package com.example.rickandmorty.screen.favorites
 
 import androidx.compose.runtime.Composable
 

@@ -4,6 +4,7 @@ import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
+import androidx.room.Update
 import com.example.rickandmorty.data.cache.entity.CharacterDBO
 import kotlinx.coroutines.flow.Flow
 
@@ -18,6 +19,9 @@ interface CharacterDao {
 
     @Query("SELECT * FROM character")
     fun observeAll(): Flow<List<CharacterDBO>>
+
+    @Update
+    suspend fun updateCharacter(character: CharacterDBO)
 
     @Query("SELECT * FROM character WHERE id = :id")
     fun getCharacterById(id: Int): Flow<CharacterDBO>

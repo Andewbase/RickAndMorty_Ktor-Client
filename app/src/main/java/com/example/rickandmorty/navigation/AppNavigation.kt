@@ -5,6 +5,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NamedNavArgument
 import androidx.navigation.NavHostController
 import androidx.navigation.NavType
@@ -16,7 +17,7 @@ import com.example.rickandmorty.screen.characters.MainScreen
 import com.example.rickandmorty.screen.characters.MainViewModel
 import com.example.rickandmorty.screen.detail.DetailScreen
 import com.example.rickandmorty.screen.detail.DetailViewModel
-import com.example.rickandmorty.screen.favorits.FavoritesScreen
+import com.example.rickandmorty.screen.favorites.FavoritesScreen
 
 @Composable
 fun AppNavigation(navController: NavHostController, padding: PaddingValues){
@@ -29,8 +30,9 @@ fun AppNavigation(navController: NavHostController, padding: PaddingValues){
     ){
         composable(route = AppScreens.Main.name){
             val mainViewModel = hiltViewModel<MainViewModel>()
-            val state by mainViewModel.state.collectAsState()
-            MainScreen(state = state, navController)
+            val state by mainViewModel.mainState.collectAsState()
+            val send = mainViewModel::send
+            MainScreen(mainState = state, send = send, navController)
         }
         composable(route = detailRoute(), arguments = detailArgument()){
             val detailViewModel = hiltViewModel<DetailViewModel>()
