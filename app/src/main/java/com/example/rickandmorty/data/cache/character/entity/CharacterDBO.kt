@@ -1,4 +1,4 @@
-package com.example.rickandmorty.data.cache.entity
+package com.example.rickandmorty.data.cache.character.entity
 
 import androidx.room.ColumnInfo
 import androidx.room.Embedded

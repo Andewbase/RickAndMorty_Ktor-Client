@@ -165,7 +165,6 @@ fun DetailScreen (
 
 }
 
-
 @Preview(showBackground = true)
 @Composable
 fun DetailScreenPreview() {

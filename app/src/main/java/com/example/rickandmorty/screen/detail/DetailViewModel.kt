@@ -7,15 +7,21 @@ import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.rickandmorty.Constant.ID_ARGUMENT
+import com.example.rickandmorty.data.FavoriteRepository
 import com.example.rickandmorty.data.RickAndMortyRepository
+import com.example.rickandmorty.data.toFavorite
 import com.example.rickandmorty.domain.Character
+import com.example.rickandmorty.domain.Favorite
+import com.example.rickandmorty.domain.Location
+import com.example.rickandmorty.domain.Origin
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
 class DetailViewModel @Inject constructor(
-    private val repository: RickAndMortyRepository.Base,
+    private val rickAndMortyRepository: RickAndMortyRepository.Base,
+    private val favoriteRepository: FavoriteRepository.Base,
     savedStateHandle: SavedStateHandle
 ): ViewModel() {
 
@@ -27,7 +33,7 @@ class DetailViewModel @Inject constructor(
         val id: Int = savedStateHandle[ID_ARGUMENT] ?: 1
 
         viewModelScope.launch {
-            repository.getByIdCharacter(id).collect{ character ->
+            rickAndMortyRepository.getByIdCharacter(id).collect{ character ->
                 state = state.copy(character = character)
             }
         }
@@ -44,7 +50,9 @@ class DetailViewModel @Inject constructor(
 
     private fun updateCharacter(character: Character){
         viewModelScope.launch {
-            repository.updateCharacter(character)
+            rickAndMortyRepository.updateCharacter(character)
+            if (character.isFavorite) favoriteRepository.saveFavorite(character.toFavorite())
+            else favoriteRepository.deleteFavorite(character.toFavorite())
         }
     }
 
@@ -71,4 +79,28 @@ class DetailViewModel @Inject constructor(
     }
 
 
+}
+
+private fun Character.toFavorite(): Favorite{
+    return Favorite(
+        created = this.created,
+        episode = this.episode,
+        gender = this.gender,
+        id = this.id,
+        image = this.image,
+        location = Location(
+            name = this.location.name,
+            url = this.location.url
+        ),
+        name = this.name,
+        origin = Origin(
+            name = this.origin.name,
+            url = this.origin.url
+        ),
+        species = this.species,
+        status = this.status,
+        type = this.type,
+        url = this.url,
+        isFavorite = this.isFavorite
+    )
 }

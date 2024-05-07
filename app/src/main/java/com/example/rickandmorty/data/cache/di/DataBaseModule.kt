@@ -2,8 +2,9 @@ package com.example.rickandmorty.data.cache.di
 
 import android.content.Context
 import androidx.room.Room
-import com.example.rickandmorty.data.cache.CharacterDao
+import com.example.rickandmorty.data.cache.character.CharacterDao
 import com.example.rickandmorty.data.cache.RickAndMortyDataBase
+import com.example.rickandmorty.data.cache.favorite.FavoriteDao
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -26,8 +27,14 @@ class DataBaseModule {
 
     @Provides
     @Singleton
-    fun provideCharacterDao(appDatabase: RickAndMortyDataBase): CharacterDao{
+    fun provideCharacterDao(appDatabase: RickAndMortyDataBase): CharacterDao {
         return appDatabase.getCharacterDao()
+    }
+
+    @Provides
+    @Singleton
+    fun provideFavoriteDao(appDatabase: RickAndMortyDataBase): FavoriteDao{
+        return appDatabase.getFavoriteDao()
     }
 
 }

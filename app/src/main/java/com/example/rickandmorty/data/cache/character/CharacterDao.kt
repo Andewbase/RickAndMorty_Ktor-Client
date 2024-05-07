@@ -1,11 +1,11 @@
-package com.example.rickandmorty.data.cache
+package com.example.rickandmorty.data.cache.character
 
 import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import androidx.room.Update
-import com.example.rickandmorty.data.cache.entity.CharacterDBO
+import com.example.rickandmorty.data.cache.character.entity.CharacterDBO
 import kotlinx.coroutines.flow.Flow
 
 @Dao

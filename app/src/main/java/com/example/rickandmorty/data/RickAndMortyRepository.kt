@@ -1,7 +1,7 @@
 package com.example.rickandmorty.data
 
-import com.example.rickandmorty.data.cache.CharacterDao
-import com.example.rickandmorty.data.cache.entity.CharacterDBO
+import com.example.rickandmorty.data.cache.character.CharacterDao
+import com.example.rickandmorty.data.cache.character.entity.CharacterDBO
 import com.example.rickandmorty.data.network.RickAndMortyApi
 import com.example.rickandmorty.domain.Character
 import kotlinx.coroutines.ExperimentalCoroutinesApi
