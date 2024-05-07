@@ -22,29 +22,28 @@ import com.example.rickandmorty.navigation.AppScreens
 @Composable
 fun MainScreen (
     mainState: MainState,
-    send: (MainEvent) -> Unit,
     navController: NavController,
     modifier: Modifier = Modifier
 ){
     when (mainState){
-        is MainState.Success -> ShowContent(mainState = mainState, send = send, navController = navController, modifier = modifier)
-        is MainState.Loading -> ShowContent(mainState = mainState, send = send, navController = navController, modifier = modifier)
-        is MainState.Error -> ShowContent(mainState = mainState, send = send, navController = navController, modifier = modifier)
+        is MainState.Success -> ShowContent(mainState = mainState, navController = navController, modifier = modifier)
+        is MainState.Loading -> ShowContent(mainState = mainState, navController = navController, modifier = modifier)
+        is MainState.Error -> ShowContent(mainState = mainState, navController = navController, modifier = modifier)
         MainState.None -> Text(text = "None")
     }
 }
 
 @Composable
-private fun ShowContent(mainState: MainState.Success, send: (MainEvent) -> Unit, navController: NavController, modifier: Modifier = Modifier){
+private fun ShowContent(mainState: MainState.Success, navController: NavController, modifier: Modifier = Modifier){
     val characters = mainState.characters
     LazyColumn {
         items(
             items = characters,
             key = {character -> character.id}
         ) {character ->
+
             Item(
                 characterItemUI = character,
-                send = send,
                 modifier = modifier.clickable {
                     navController.navigate(route = AppScreens.Detail.name + "?${Constant.ID_ARGUMENT}=${character.id}")
                 }
@@ -54,7 +53,7 @@ private fun ShowContent(mainState: MainState.Success, send: (MainEvent) -> Unit,
 }
 
 @Composable
-private fun ShowContent(mainState: MainState.Loading, send: (MainEvent) -> Unit, navController: NavController, modifier: Modifier = Modifier){
+private fun ShowContent(mainState: MainState.Loading, navController: NavController, modifier: Modifier = Modifier){
     val characters = mainState.characters
     if (characters != null){
         LazyColumn {
@@ -64,7 +63,6 @@ private fun ShowContent(mainState: MainState.Loading, send: (MainEvent) -> Unit,
             ) {character ->
                 Item(
                     characterItemUI = character,
-                    send = send,
                     modifier = modifier.clickable {
                         navController.navigate(route = AppScreens.Detail.name + "?${Constant.ID_ARGUMENT}=${character.id}")
                     }
@@ -77,7 +75,7 @@ private fun ShowContent(mainState: MainState.Loading, send: (MainEvent) -> Unit,
 }
 
 @Composable
-private fun ShowContent(mainState: MainState.Error, send: (MainEvent) -> Unit, navController: NavController, modifier: Modifier = Modifier){
+private fun ShowContent(mainState: MainState.Error, navController: NavController, modifier: Modifier = Modifier){
     val characters = mainState.characters
     if (characters != null){
         LazyColumn {
@@ -88,7 +86,6 @@ private fun ShowContent(mainState: MainState.Error, send: (MainEvent) -> Unit, n
 
                 Item(
                     characterItemUI = character,
-                    send = send,
                     modifier = modifier.clickable {
                         navController.navigate(route = AppScreens.Detail.name + "?${Constant.ID_ARGUMENT}=${character.id}")
                     }
@@ -102,7 +99,6 @@ private fun ShowContent(mainState: MainState.Error, send: (MainEvent) -> Unit, n
 @Composable
 private fun Item(
     characterItemUI: CharacterItemUI,
-    send: (MainEvent) -> Unit,
     modifier: Modifier = Modifier
 ){
 
@@ -118,17 +114,6 @@ private fun Item(
                 .align(Alignment.CenterVertically),
                 contentAlignment = Alignment.Center){
                 Text(text = characterItemUI.name)
-            }
-
-            Box {
-              Icon(
-                  imageVector = if (characterItemUI.isFavorite) Icons.Filled.Favorite else Icons.Filled.FavoriteBorder,
-                  contentDescription = "Favorite",
-                  modifier = modifier.clickable {
-                      if (!characterItemUI.isFavorite) send(MainEvent.UpdateFavorite( isFavorite = true))
-                      else send(MainEvent.UpdateFavorite(isFavorite = false))
-                  }
-              )
             }
         }
 

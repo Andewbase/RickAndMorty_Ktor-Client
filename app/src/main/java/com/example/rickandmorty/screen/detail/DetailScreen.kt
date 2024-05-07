@@ -1,6 +1,7 @@
 package com.example.rickandmorty.screen.detail
 
 import android.annotation.SuppressLint
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -10,6 +11,8 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Clear
+import androidx.compose.material.icons.filled.Favorite
+import androidx.compose.material.icons.filled.FavoriteBorder
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
@@ -33,6 +36,7 @@ import com.example.rickandmorty.ui.theme.AppTheme
 @Composable
 fun DetailScreen (
     state: DetailState,
+    send: (DetailEvent) -> Unit,
     navController: NavController,
     modifier: Modifier = Modifier
 ){
@@ -47,7 +51,7 @@ fun DetailScreen (
                     titleContentColor = MaterialTheme.colorScheme.primary,
                 ),
                 title = {
-                    Text("Small Top App Bar")
+                    Text("Rick And Morty App")
                 },
                 navigationIcon = {
                     IconButton(onClick = { navController.popBackStack() }) {
@@ -132,6 +136,28 @@ fun DetailScreen (
                 }
             }
 
+            Row {
+                Box(modifier.padding(start = 20.dp)) {
+                    Text(text = "Type :")
+                }
+                Box(
+                    modifier = modifier
+                        .weight(1f)
+                        .align(Alignment.CenterVertically)
+                        .padding(end = 100.dp),
+                    contentAlignment = Alignment.Center,
+                ) {
+                    Icon(
+                        imageVector = if (character.isFavorite) Icons.Filled.Favorite else Icons.Filled.FavoriteBorder,
+                        contentDescription = "Favorite",
+                        modifier = modifier.clickable {
+                            if (!character.isFavorite) send(DetailEvent.UpdateFavorite( isFavorite = true))
+                            else send(DetailEvent.UpdateFavorite(isFavorite = false))
+                        }
+                    )
+                }
+            }
+
         }
     }
 
@@ -147,6 +173,7 @@ fun DetailScreenPreview() {
     AppTheme {
         DetailScreen(
             state = DetailState(),
+            send = {},
             navController = rememberNavController()
         )
     }

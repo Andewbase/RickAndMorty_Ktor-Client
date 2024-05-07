@@ -31,13 +31,13 @@ fun AppNavigation(navController: NavHostController, padding: PaddingValues){
         composable(route = AppScreens.Main.name){
             val mainViewModel = hiltViewModel<MainViewModel>()
             val state by mainViewModel.mainState.collectAsState()
-            val send = mainViewModel::send
-            MainScreen(mainState = state, send = send, navController)
+            MainScreen(mainState = state, navController)
         }
         composable(route = detailRoute(), arguments = detailArgument()){
             val detailViewModel = hiltViewModel<DetailViewModel>()
             val state  = detailViewModel.state
-            DetailScreen(state = state, navController = navController)
+            val send = detailViewModel::send
+            DetailScreen(state = state, send = send, navController = navController)
         }
         composable(route = AppScreens.Favorites.name){
             FavoritesScreen()
