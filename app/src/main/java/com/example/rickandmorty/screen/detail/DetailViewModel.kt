@@ -9,7 +9,6 @@ import androidx.lifecycle.viewModelScope
 import com.example.rickandmorty.Constant.ID_ARGUMENT
 import com.example.rickandmorty.data.FavoriteRepository
 import com.example.rickandmorty.data.RickAndMortyRepository
-import com.example.rickandmorty.data.toFavorite
 import com.example.rickandmorty.domain.Character
 import com.example.rickandmorty.domain.Favorite
 import com.example.rickandmorty.domain.Location
