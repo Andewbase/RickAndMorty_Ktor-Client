@@ -17,6 +17,7 @@ import com.example.rickandmorty.screen.characters.MainViewModel
 import com.example.rickandmorty.screen.detail.DetailScreen
 import com.example.rickandmorty.screen.detail.DetailViewModel
 import com.example.rickandmorty.screen.favorites.FavoritesScreen
+import com.example.rickandmorty.screen.favorites.FavoritesViewModel
 
 @Composable
 fun AppNavigation(navController: NavHostController, padding: PaddingValues){
@@ -39,7 +40,9 @@ fun AppNavigation(navController: NavHostController, padding: PaddingValues){
             DetailScreen(state = state, send = send, navController = navController)
         }
         composable(route = AppScreens.Favorites.name){
-            FavoritesScreen()
+            val favoritesViewModel = hiltViewModel<FavoritesViewModel>()
+            val favorites by favoritesViewModel.favorites.collectAsState(initial = emptyList())
+            FavoritesScreen(favorites = favorites)
         }
     }
 }

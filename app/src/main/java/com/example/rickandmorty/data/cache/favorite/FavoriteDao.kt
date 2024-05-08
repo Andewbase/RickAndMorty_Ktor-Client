@@ -15,7 +15,7 @@ interface FavoriteDao {
     suspend fun saveFavorite(favoriteDBO: FavoriteDBO)
 
     @Query("SELECT * FROM favorite")
-    fun getAllFavorites(): Flow<FavoriteDBO>
+    fun getAllFavorites(): Flow<List<FavoriteDBO>>
 
     @Delete
     suspend fun deleteFavorite(favoriteDBO: FavoriteDBO)

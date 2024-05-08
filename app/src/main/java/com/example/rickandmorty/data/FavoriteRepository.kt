@@ -8,7 +8,7 @@ import javax.inject.Inject
 
 interface FavoriteRepository {
 
-    fun getAllFavorites(): Flow<Favorite>
+    fun getAllFavorites(): Flow<List<Favorite>>
 
     suspend fun saveFavorite(favorite: Favorite)
 
@@ -17,9 +17,11 @@ interface FavoriteRepository {
     class Base @Inject constructor(
         private val favoriteDao: FavoriteDao
     ): FavoriteRepository{
-        override fun getAllFavorites(): Flow<Favorite> {
-           return favoriteDao.getAllFavorites().map {
-               it.toFavorite()
+        override fun getAllFavorites(): Flow<List<Favorite>> {
+           return favoriteDao.getAllFavorites().map { list ->
+               list.map {
+                   it.toFavorite()
+               }
            }
         }
 
