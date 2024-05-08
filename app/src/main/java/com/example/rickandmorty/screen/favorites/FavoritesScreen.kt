@@ -1,6 +1,5 @@
 package com.example.rickandmorty.screen.favorites
 
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
@@ -10,13 +9,8 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.navigation.NavController
 import coil.compose.AsyncImage
-import com.example.rickandmorty.Constant
 import com.example.rickandmorty.domain.Favorite
-import com.example.rickandmorty.navigation.AppScreens
-import com.example.rickandmorty.screen.characters.CharacterItemUI
-import com.example.rickandmorty.screen.characters.MainState
 
 @Composable
 fun FavoritesScreen(favorites: List<Favorite>){
